@@ -34,7 +34,8 @@ class FRUIT: # Frucht erstellen
 
     def draw_fruit(self):
         fruit_rect = pygame.Rect(int(self.pos.x * cell_size),int(self.pos.y * cell_size),cell_size,cell_size) # viereck erstellen (x,y,w,h)
-        pygame.draw.rect(screen,(126,166,114),fruit_rect) # viereck zeichnen (öberfläche, farbe, viereck)
+        screen.blit(apple,fruit_rect)
+       # pygame.draw.rect(screen,(126,166,114),fruit_rect) # viereck zeichnen (öberfläche, farbe, viereck) # man braucht jetzt rec nicht mehr
 
     def randomize(self):
         self.x = random.randint(0,cell_number - 1) # damit frucht random spawned
@@ -77,6 +78,7 @@ cell_size = 40
 cell_number = 18
 screen = pygame.display.set_mode((cell_number * cell_size,cell_number * cell_size)) # Breite und Höhe (400x400 pixel) (display surface) gibt nur eins
 clock = pygame.time.Clock()
+apple = pygame.image.load('Graphic/apple-min.png').convert_alpha() # Apfel der in Dateien gespeichert ist soll eigefügt werden
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE,150) # alle 150 millisek. wird timer ausgelöst
