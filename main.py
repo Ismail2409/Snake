@@ -143,7 +143,7 @@ class MAIN:
         sys.exit()
 
     def draw_grass(self):
-        grass_color = (160, 220, 50)
+        grass_color = (160,220,50)
         for row in range(cell_number):
             if row % 2 == 0:
                 for col in range(cell_number):
