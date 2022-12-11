@@ -124,6 +124,7 @@ class MAIN:
         self.draw_grass()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
+        self.draw_score()
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:  # wenn frucht = auf schlangenkopf
@@ -156,6 +157,22 @@ class MAIN:
                         grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
                         pygame.draw.rect(screen, grass_color, grass_rect)
 
+    def draw_score(self):
+        score_text = str(len(self.snake.body) - 3)
+        score_surface = game_font.render(score_text, True, (56, 74, 12))
+        score_x = int(cell_size * cell_number - 60)
+        score_y = int(cell_size * cell_number - 40)
+        score_rect = score_surface.get_rect(center = (score_x, score_y))
+        screen.blit(score_surface, score_rect)
+        apple_rect = apple.get_rect(midright = (score_rect.left, score_rect.centery))  # damit apfel nebem score angezeigt wird
+        bg_rect = pygame.Rect(apple_rect.left, apple_rect.top, apple_rect.width + score_rect.width, apple_rect.height)  # Zahl zu nah am Rahmen nach score_rect.width eig. + zahl (funktioniert nicht)
+
+        pygame.draw.rect(screen, (167, 209, 61), bg_rect)
+        screen.blit(score_surface, score_rect)
+        screen.blit(apple, apple_rect)
+        pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)  # Rahmen
+
+
 pygame.init()
 cell_size = 38
 cell_number = 19
@@ -163,6 +180,7 @@ screen = pygame.display.set_mode((cell_number * cell_size,
                                   cell_number * cell_size))  # Breite und Höhe (400x400 pixel) (display surface) gibt nur eins
 clock = pygame.time.Clock()
 apple = pygame.image.load('Graphics/apple-min.png').convert_alpha()  # Apfel der in Dateien gespeichert ist soll eigefügt werden
+game_font = pygame.font.Font(None, 30)  # TTF file herunterladen oder None schreiben (30=grösse)
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)  # alle 150 millisek. wird timer ausgelöst
@@ -194,3 +212,4 @@ while True:
     main_game.draw_elements()
     pygame.display.update()  # in dieser while loop alle unsere Elemente Zeichnen
     clock.tick(60)  # wie schnell die while loop pro Sekunde max rennen kann (max 60 frames pro Sekunde)
+
