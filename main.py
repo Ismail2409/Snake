@@ -26,6 +26,7 @@ class SNAKE:
         self.body_tl = pygame.image.load('Graphics/body_tl.png').convert_alpha()
         self.body_br = pygame.image.load('Graphics/body_br.png').convert_alpha()
         self.body_bl = pygame.image.load('Graphics/body_bl.png').convert_alpha()
+        self.crunch_sound = pygame.mixer.Sound('Sound/crunch.wav')  # mit diesem code wird der Sound importiert
 
     def draw_snake(self):
         self.update_head_graphics()
@@ -93,6 +94,8 @@ class SNAKE:
     def add_block(self):
         self.new_block = True
 
+    def play_crunch_sound(self):
+        self.crunch_sound.play()
 
 class FRUIT:  # Frucht erstellen
     def __init__(self):  # x und y position erstellen
@@ -130,6 +133,7 @@ class MAIN:
         if self.fruit.pos == self.snake.body[0]:  # wenn frucht = auf schlangenkopf
             self.fruit.randomize()  # fruch umpositionieren
             self.snake.add_block()  # block an schlange hinzufügen
+            self.snake.play_crunch_sound() # sobald schlangenkopf stelle mit object berührt = sound
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:  # schauen ob schlange aus map, 0 ist kopf
@@ -172,7 +176,7 @@ class MAIN:
         screen.blit(apple, apple_rect)
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)  # Rahmen
 
-
+pygame.mixer.pre_init(44100,-16,2,512)
 pygame.init()
 cell_size = 38
 cell_number = 19
