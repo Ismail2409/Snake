@@ -7,7 +7,7 @@ from pygame.math import Vector2  # um nicht immer pygame.math zu schreiben
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]  # startgrösse
-        self.direction = Vector2(1, 0)
+        self.direction = Vector2(0, 0)
         self.new_block = False
         self.head_up = pygame.image.load('Graphics/head_up.png').convert_alpha()
         self.head_down = pygame.image.load('Graphics/head_down.png').convert_alpha()
@@ -97,6 +97,9 @@ class SNAKE:
     def play_crunch_sound(self):
         self.crunch_sound.play()
 
+    def reset(self):
+        self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
+        self.direction = Vector2(0, 0)
 class FRUIT:  # Frucht erstellen
     def __init__(self):  # x und y position erstellen
         self.randomize()
@@ -135,6 +138,9 @@ class MAIN:
             self.snake.add_block()  # block an schlange hinzufügen
             self.snake.play_crunch_sound() # sobald schlangenkopf stelle mit object berührt = sound
 
+        for block in  self.snake.body[1:]:
+            if block == self.fruit.pos:
+                self.fruit.randomize()
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:  # schauen ob schlange aus map, 0 ist kopf
             self.game_over()
@@ -144,8 +150,7 @@ class MAIN:
                 self.game_over()
 
     def game_over(self):
-        pygame.quit()
-        sys.exit()
+        self.snake.reset()
 
     def draw_grass(self):
         grass_color = (160, 220, 50)
