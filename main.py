@@ -136,7 +136,7 @@ class MAIN:
         if self.fruit.pos == self.snake.body[0]:  # wenn frucht = auf schlangenkopf
             self.fruit.randomize()  # fruch umpositionieren
             self.snake.add_block()  # block an schlange hinzufügen
-            self.snake.play_crunch_sound() # sobald schlangenkopf stelle mit object berührt = sound
+            self.snake.play_crunch_sound()  # sobald schlangenkopf stelle mit object berührt = sound
 
         for block in  self.snake.body[1:]:
             if block == self.fruit.pos:
