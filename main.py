@@ -1,3 +1,5 @@
+# Es sind immer die zwei gleichen Links. Sie überschneiden sich, weshalb wir bei jedem wechsel den Link hinzugefügt haben.
+# https://www.youtube.com/watch?v=QFvqStqPCRU&t=178s
 import pygame
 import random
 import sys
@@ -189,20 +191,24 @@ class MAIN:
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)  # Rahmen
 
 
+# https://www.youtube.com/watch?v=GMBqjxcKogA
+
 # Startbildschirm
+
 def get_font(size):  # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
+
 def play():
 
-    screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
+    screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size)) # https://www.youtube.com/watch?v=QFvqStqPCRU&t=178s
 
-    SCREEN_UPDATE = pygame.USEREVENT
+    SCREEN_UPDATE = pygame.USEREVENT # https://www.youtube.com/watch?v=GMBqjxcKogA
     pygame.time.set_timer(SCREEN_UPDATE, 150)  # alle 150 millisekunde wird timer ausgelöst speed
 
     main_game = MAIN()
 
-    while True:
+    while True: # https://www.youtube.com/watch?v=QFvqStqPCRU&t=178s
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -228,10 +234,8 @@ def play():
         pygame.display.update()  # in dieser while loop alle unsere Elemente Zeichnen
         clock.tick(60)  # wie schnell die while loop pro Sekunde max rennen kann (max 60 frames pro Sekunde)
 
-        #pygame.display.update()
 
-
-def options():
+def options(): # https://www.youtube.com/watch?v=GMBqjxcKogA
     while True:
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
@@ -296,7 +300,7 @@ def main_menu():
         pygame.display.update()
 
 
-pygame.init()
+pygame.init() # https://www.youtube.com/watch?v=QFvqStqPCRU&t=178s
 
 cell_size = 37
 cell_number = 19
@@ -305,12 +309,12 @@ clock = pygame.time.Clock()
 game_font = pygame.font.Font(None, 30)  # TTF file herunterladen oder None schreiben (30=grösse)
 
 screen = pygame.display.set_mode((cell_number * cell_size,
-                                  cell_number * cell_size))  # Breite und Höhe (400x400 pixel) (display surface) gibt nur eins
+                                  cell_number * cell_size))  # Breite und Höhe (pixel) (display surface) gibt nur eins
 apple = pygame.image.load(
     'Graphics/apple-min.png').convert_alpha()  # Apfel der in Dateien gespeichert ist soll eingefügt werden
 
 
-SCREEN = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+SCREEN = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) # https://www.youtube.com/watch?v=GMBqjxcKogA
 
 pygame.display.set_caption("Menu")
 
